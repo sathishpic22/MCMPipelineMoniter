@@ -14,33 +14,11 @@ import com.pipe.model.PipelineMoniter;
 import com.pipe.repositary.PipelineRepositary;
 @Controller
 public class MainController {
-	@Autowired
-	PipelineRepositary piperepo;
-	
-	@RequestMapping("/save" )
-
-	public String index() {
-		PipelineMoniter p=new PipelineMoniter();
+	@RequestMapping("/" )
+public String index() {
 		
-		p.setPipelineId(120120211);
-		p.setCustomerName("Sathish");
-		p.setDateofEnquiry(new Date());
+	return "newpipeline.jsp";
 		
-		System.out.println(piperepo.save(p));
-		
-		return "save.jsp";
-		
-		
-	}
-	@RequestMapping(value="/test" )
-	public String login( Model m) {
-		
-List<PipelineMoniter> pllist = new ArrayList<>();
-
-pllist=(List<PipelineMoniter>) piperepo.findAll();
-m.addAttribute("plist", pllist);
-
-	return  "login.jsp";
-	}	
+}	
 
 }
