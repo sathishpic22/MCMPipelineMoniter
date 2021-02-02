@@ -8,11 +8,10 @@
 </head>
 <body>
 <h1>WElcome to Pipeline </h1>
-
-<a href="newpipeline">NewPipeline</a>
-<a href="statusupdate">Status Update</a>
-<a href="lastfollowed">LastFollow Update</a>
-<a href="salesupdate">Sales Update</a>
-<a href="logout">Logout</a>
+<a href="newpipeline">NewPipeline</a><br><br>
+<a href="statusupdateview">Status Update</a><br><br>
+<a href="lastfollowedview">LastFollow Update</a><br><br>
+<a href="salesupdateview">Sales Update</a><br><br>
+<a href="logout">Logout</a><br>
 </body>
 </html>

@@ -10,42 +10,40 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 	@Id
-	private String Username;
-	private String Password;
-	private String UserType;
-	
+	private String username;
+	private String password;
+	private String userType;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public User(String username, String password, String userType) {
 		super();
-		Username = username;
-		Password = password;
-		UserType = userType;
+		this.username = username;
+		this.password = password;
+		this.userType = userType;
 	}
 	public String getUsername() {
-		return Username;
+		return username;
 	}
 	public void setUsername(String username) {
-		Username = username;
+		this.username = username;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 	public String getUserType() {
-		return UserType;
+		return userType;
 	}
 	public void setUserType(String userType) {
-		UserType = userType;
+		this.userType = userType;
 	}
-	@Override
-	public String toString() {
-		return "User [Username=" + Username + ", Password=" + Password + ", UserType=" + UserType + "]";
-	}
+	
+	
+	
 	
 	
 }
