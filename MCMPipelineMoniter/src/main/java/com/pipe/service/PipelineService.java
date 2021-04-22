@@ -1,7 +1,5 @@
 package com.pipe.service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
@@ -20,7 +18,7 @@ public class PipelineService implements PipelineMoniterInterface  {
 	PipelineRepositary pipelinerepositary;
 	
 
-	public boolean updateStatus(Long pipelineId,String status) {
+	public boolean updateStatus(long pipelineId,String status) {
 		PipelineMoniter pipemoniter=new PipelineMoniter();
 		boolean statusupdate=false;
 		Optional<PipelineMoniter> p= pipelinerepositary.findById(pipelineId);

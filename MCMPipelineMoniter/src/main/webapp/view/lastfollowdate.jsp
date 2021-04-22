@@ -9,6 +9,43 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+ <form id="lastfollowupdate" class="form-horizontal" action="newEnquiry()">
+ <h1>Last FollowDate Update</h1>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pipelineid">PipelineId:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="pipelineid" placeholder=" PipelineId" name="pipelineid" required>
+        </div>
+        </div>
+        
+           <div class="form-group">
+      <label class="control-label col-sm-2" for="email">LFDate:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="lastfollowed" placeholder="Last Followed Date" name="lastfollowed" 
+        onfocus="(this.type='date')" required>
+         </div>
+        </div>
+        
+           <div class="form-group">
+      <label class="control-label col-sm-2" for="email">LFDate:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="nextfollowdate" placeholder="Last Followed Date" name="nextfollowdate" 
+        onfocus="(this.type='date')" required>
+         </div>
+        </div>
+        
+        <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+        </form>
+
+
+
+
 <h1>Last Follow Date Update</h1>
 <form action="lastfollowdateform" method="post">
  <input type="text" name="pipelineid" placeholder=" Enter Valid PipelineId" required><br><br>

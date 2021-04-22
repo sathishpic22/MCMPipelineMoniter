@@ -1,14 +1,29 @@
 package com.pipe.controller;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pipe.model.PipelineMoniter;
 import com.pipe.model.User;
 import com.pipe.repositary.PipelineRepositary;
 import com.pipe.repositary.UserRepositary;
@@ -26,8 +41,11 @@ public class MainController {
 public ModelAndView index() {
 
 	return new ModelAndView("index");
+	
 		
 	}	
+	
+	
 @RequestMapping("/login")
 public ModelAndView logins(
 		@RequestParam("username") String username,
@@ -55,13 +73,249 @@ public ModelAndView logins(
 	
 	return new ModelAndView( "index");
 }
-@RequestMapping("/newpipeline")
-public ModelAndView newPipeline() {
-	return new ModelAndView( "newpipeline");
+
+
+@RequestMapping("/search")
+ public @ResponseBody List<PipelineMoniter> getUser(@RequestParam("searchText") String searchText) throws ParseException
+
+{
+
+	 long pipelineid=0;
+	 long phone=0;
+	boolean num=true;
+
+	
+	try {
+		
+		Long.parseLong(searchText);
+		
+		
+		
+	}
+	
+	catch(Exception e) {
+		
+		num=false;
+		
+	}
+
+	if(num==true) {
+		
+		 pipelineid=Long.parseLong(searchText);
+		 phone=Long.parseLong(searchText);
+		
+	}
+	
+    String customerName=searchText;
+    String email=searchText;
+    String instagramid=searchText;
+    SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+ 
+    	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	//List<PipelineMoniter> pipe= (List<PipelineMoniter>) pipelinerepositery.findAll();
+    	   List<PipelineMoniter>   pipe=pipelinerepositery.textSearch(pipelineid,customerName,email,phone,instagramid,dateofenquiry);
+    	    
+	
+
+	//pipelineID,customername,email,phone,instaid,dateof enquiry
+	
+	return pipe;
+
+	
+	}
+	
+
+@RequestMapping("/filtersearchoneinput")
+public @ResponseBody List<PipelineMoniter> filterSearchoneInput(
+		@RequestParam("channelReport") String channelReport,
+		@RequestParam("locationReport") String locationReport,
+		@RequestParam("ordertypeReport") String ordertypeReport,
+		@RequestParam("paymentModeReport") String paymentModeReport,
+		@RequestParam("statusReport") String statusReport
+		) throws ParseException
+
+{
+
+	 SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+	 
+	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	
+	 // channelreport,locationreport,datereport,ordertypereport,paymentmodereport,statusreport
+	
+	   List<PipelineMoniter>   pipe=pipelinerepositery.filterSearchOneInput(channelReport,locationReport,dateofenquiry,ordertypeReport,paymentModeReport,statusReport);
+
+	   
+	   return pipe;
+	
+	}
+
+
+@RequestMapping("/filtersearchtwoinputs")
+public @ResponseBody List<PipelineMoniter> filterSearchTwoInputs(
+		@RequestParam("channelReport") String channelReport,
+		@RequestParam("locationReport") String locationReport,
+		@RequestParam("ordertypeReport") String ordertypeReport,
+		@RequestParam("paymentModeReport") String paymentModeReport,
+		@RequestParam("statusReport") String statusReport
+		) throws ParseException
+
+{
+
+	 SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+	 
+	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	
+	 // channelreport,locationreport,datereport,ordertypereport,paymentmodereport,statusreport
+	
+	   List<PipelineMoniter>   pipe=pipelinerepositery.filterSearchTwoInput(channelReport,locationReport,dateofenquiry,ordertypeReport,paymentModeReport,statusReport);
+
+	   
+	   return pipe;
+	
+	}
+
+
+@RequestMapping("/filtersearchthreeinputs")
+public @ResponseBody List<PipelineMoniter> filterSearchThreeInputs(
+		@RequestParam("channelReport") String channelReport,
+		@RequestParam("locationReport") String locationReport,
+		@RequestParam("ordertypeReport") String ordertypeReport,
+		@RequestParam("paymentModeReport") String paymentModeReport,
+		@RequestParam("statusReport") String statusReport
+		) throws ParseException
+
+{
+
+	 SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+	 
+	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	
+	 // channelreport,locationreport,datereport,ordertypereport,paymentmodereport,statusreport
+	
+	   List<PipelineMoniter>   pipe=pipelinerepositery.filterSearchThreeInput(channelReport,locationReport,dateofenquiry,ordertypeReport,paymentModeReport,statusReport);
+
+	   
+	   return pipe;
+	
+	}
+
+
+@RequestMapping("/filtersearchfourinputs")
+public @ResponseBody List<PipelineMoniter> filterSearchFourInputs(
+		@RequestParam("channelReport") String channelReport,
+		@RequestParam("locationReport") String locationReport,
+		@RequestParam("ordertypeReport") String ordertypeReport,
+		@RequestParam("paymentModeReport") String paymentModeReport,
+		@RequestParam("statusReport") String statusReport
+		) throws ParseException
+
+{
+
+	 SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+	 
+	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	
+	 // channelreport,locationreport,datereport,ordertypereport,paymentmodereport,statusreport
+	
+	   List<PipelineMoniter>   pipe=pipelinerepositery.filterSearchFourInput(channelReport,locationReport,dateofenquiry,ordertypeReport,paymentModeReport,statusReport);
+
+	   
+	   return pipe;
+	
+	}
+
+
+
+@RequestMapping("/filtersearchfiveinputs")
+public @ResponseBody List<PipelineMoniter> filterSearchFiveInputs(
+		@RequestParam("channelReport") String channelReport,
+		@RequestParam("locationReport") String locationReport,
+		@RequestParam("ordertypeReport") String ordertypeReport,
+		@RequestParam("paymentModeReport") String paymentModeReport,
+		@RequestParam("statusReport") String statusReport
+		) throws ParseException
+
+{
+
+	 SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+	 
+	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	
+	 // channelreport,locationreport,datereport,ordertypereport,paymentmodereport,statusreport
+	
+	   List<PipelineMoniter>   pipe=pipelinerepositery.filterSearchFiveInput(channelReport,locationReport,dateofenquiry,ordertypeReport,paymentModeReport,statusReport);
+
+	   
+	   return pipe;
+	
+	}
+
+
+@RequestMapping("/filtersearchsixinputs")
+public @ResponseBody List<PipelineMoniter> filterSearchSixInputs(
+		@RequestParam("channelReport") String channelReport,
+		@RequestParam("locationReport") String locationReport,
+		@RequestParam("ordertypeReport") String ordertypeReport,
+		@RequestParam("paymentModeReport") String paymentModeReport,
+		@RequestParam("statusReport") String statusReport
+		) throws ParseException
+
+{
+
+	 SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd"); 
+	 
+	   Date dateofenquiry=formatter1.parse("20-01-2021");  
+	
+	 // channelreport,locationreport,datereport,ordertypereport,paymentmodereport,statusreport
+	
+	   List<PipelineMoniter>   pipe=pipelinerepositery.filterSearchSixInput(channelReport,locationReport,dateofenquiry,ordertypeReport,paymentModeReport,statusReport);
+
+	   
+	   return pipe;
+	
+	}
+
+
+
+	
+
+
+
+
+
+@RequestMapping("/saveUser")
+@ResponseBody 
+public String saveUser(@RequestParam("name") String name,
+        @RequestParam("lastname") String lastname)
+{
+	JSONObject resObj = new JSONObject();
+	
+
+	try {
+		resObj.put("username", name);
+		resObj.put("lastname",lastname);
+	}
+catch(Exception e){
+	System.out.print(e.getMessage());
 }
-@RequestMapping("/newenquiry")
-	public ModelAndView newPipeline(
-			@RequestParam("pipelineid") long pipelineid,
+	return resObj.toString();
+	
+	}
+
+@RequestMapping("/test")
+public  ModelAndView newPipeline() {
+ModelAndView mv=new ModelAndView("loginsuccess");
+
+mv.addObject("success", "test Working");
+return mv;
+}
+
+
+@RequestMapping("/newpipeline")
+@ResponseBody
+public  String newPipeline(
+		
+			@RequestParam("newpipelineid") String pipelineid,
 			@RequestParam("customername") String customername,
 			@RequestParam("channel") String channel,
 			@RequestParam("status") String status,
@@ -72,90 +326,116 @@ public ModelAndView newPipeline() {
 			@RequestParam("dateofenquiry") @DateTimeFormat(pattern="yyyy-MM-dd") Date enquirydate,
 			@RequestParam("lastfollowed") @DateTimeFormat(pattern="yyyy-MM-dd") Date lastfollowed,
 			@RequestParam("nextfollowdate") @DateTimeFormat(pattern="yyyy-MM-dd") Date  nextfollowdate,
-			@RequestParam("email") String email,
+			@RequestParam("emailid") String email,
 			@RequestParam("ordertype") String ordertype) {
-	ModelAndView newpipelineview=new ModelAndView();
-newpipelineview.setViewName("newpipeline");
+	System.out.println("success");
 	
-if(pipelineservice.newPipeline(pipelineid, customername, channel, status, ordervalue, location, phone, instaid, 
-		enquirydate, email, ordertype, lastfollowed, nextfollowdate)!=null){
-			newpipelineview.addObject("success", "New Pipeline Added Successfully");
-		}
-	  
-	  
- 
+	long newpipelineid1=Long.parseLong(pipelineid);  
 
-return newpipelineview;
+	
+	
+	PipelineMoniter newpipeline=null;
+	
+	
+ newpipeline=pipelineservice.newPipeline(newpipelineid1, customername, channel, status, ordervalue, location, phone, instaid, 
+		enquirydate, email, ordertype, lastfollowed, nextfollowdate);
+ JSONObject resObj = new JSONObject();
+ if(newpipeline!=null) {
+	 
+	resObj.put("success", "New Pipeline Added Successfully");
+	 
+	 
+ }
+			
+	  return resObj.toString();
 		
 	}
-@RequestMapping("/statusupdateview")
-public ModelAndView statusUpdateView() {
-	return new ModelAndView( "statusupdate");
-}
+
+
+
+
 
 @RequestMapping("/statusupdate")
-public ModelAndView StatusUpdate(@RequestParam("pipelineid") long pipelineid,
-		@RequestParam("statusmsg") String statusmsg) {
-
-ModelAndView statusview=new ModelAndView();
-statusview.setViewName("statusupdate");
-
+@ResponseBody
+public  String StatusUpdate(@RequestParam("pipelineid") String pipelineid,
+		@RequestParam("statusmessage") String statusmsg) {
 	
-	if(pipelineservice.updateStatus(pipelineid, statusmsg)==true){
+	System.out.println("success");
 	
-		statusview.addObject("Success", "Status Updated successfully");
+	long statuspipelineid=Long.parseLong(pipelineid);  
+
+	JSONObject resObj = new JSONObject();
+
+
+
+
+	if(pipelineservice.updateStatus(statuspipelineid, statusmsg)==true){
+	
+		resObj.put("success", "Status Updated successfully");
 		}
 	else {
-		statusview.addObject("ErrorMessage", "Enter Valid PipelineId");
+		resObj.put("success", "Enter Valid PipelineId");
 	}
-	return statusview;
-}
-@RequestMapping("/lastfollowedview")
-public ModelAndView lastFollowedView() {
-	return new ModelAndView("lastfollowdate");
 	
-}
-@RequestMapping("lastfollowdateform")
-public ModelAndView lastFollowForm(@RequestParam("pipelineid") long pipelineid,
-		@RequestParam("lastfollowed") @DateTimeFormat(pattern="yyyy-MM-dd") Date lastfollowed,
-		@RequestParam("nextfollowdate") @DateTimeFormat(pattern="yyyy-MM-dd") Date  nextfollowdate) {
 	
-	ModelAndView statusview=new ModelAndView();
-	statusview.setViewName("lastfollowdate");
-	if(pipelineservice.updateLastFollowDate(pipelineid, lastfollowed, nextfollowdate)==true) {
-		
-		statusview.addObject("Success", "LastFollowDate Updated Successfully");
-}
-else {
-statusview.addObject("ErrorMessage", "Enter Valid PipelineId");
+	return resObj.toString();
 }
 
-return statusview;
+
+
+
+@RequestMapping("/lastfollowdateform")
+@ResponseBody
+public String lastFollowForm(@RequestParam("pipelineid") String pipelineid,
+		@RequestParam("lastfollowdate") @DateTimeFormat(pattern="yyyy-MM-dd") Date lastfollowed,
+		@RequestParam("nextfollowdatenew") @DateTimeFormat(pattern="yyyy-MM-dd") Date nextfollowdate)
+		 {
+	
+	long lastfollowpipelineid=Long.parseLong(pipelineid); 
+	
+	JSONObject resObj = new JSONObject();
+	
+	
+	
+	if(pipelineservice.updateLastFollowDate(lastfollowpipelineid, lastfollowed, nextfollowdate)==true) {
+		
+		resObj.put("success", "LastFollowDate Updated Successfully");
+}
+else {
+	resObj.put("success", "Enter Valid PipelineId");
+}
+
+return resObj.toString();
 	
 }
-@RequestMapping("/salesupdateview")
-public ModelAndView salesUpdateView() {
-	return new ModelAndView("saleupdate");
-	
-}
-@RequestMapping("saleupdate")
-public ModelAndView salesUpdate(@RequestParam("pipelineid") Long pipelineid,
-		@RequestParam("saledate") @DateTimeFormat(pattern="yyyy-MM-dd") Date saledate,
+
+
+
+@RequestMapping("/saleupdate")
+@ResponseBody
+public String salesUpdate(@RequestParam("pipelineid") String pipelineid,
+		@RequestParam("saledateid") @DateTimeFormat(pattern="yyyy-MM-dd") Date saledate,
 		@RequestParam("paymentmode") String paymentmode) {
+long salesupdatepipelineid=Long.parseLong(pipelineid); 
 	
-	ModelAndView statusview=new ModelAndView();
-	statusview.setViewName("saleupdate");
-	if(pipelineservice.saleUpdate(pipelineid,saledate,paymentmode)==true) {
+	JSONObject resObj = new JSONObject();
+	
+	if(pipelineservice.saleUpdate(salesupdatepipelineid,saledate,paymentmode)==true) {
 		
-		statusview.addObject("Success", "Sale Updated Successfully");
+		resObj.put("success", "Sale Updated Successfully");
 }
 else {
-statusview.addObject("ErrorMessage", "Enter Valid PipelineId");
+	resObj.put("success", "Enter Valid PipelineId");
 }
 
-return statusview;
+return resObj.toString();
 	
 }
+
+
+
+
+
 @RequestMapping("logout")
 public ModelAndView logout() {
 	ModelAndView logoutview=new ModelAndView();
@@ -164,7 +444,6 @@ public ModelAndView logout() {
 	return logoutview;
 	
 }
-
 
 
 }
