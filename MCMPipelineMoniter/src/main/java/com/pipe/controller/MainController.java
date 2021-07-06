@@ -45,7 +45,7 @@ public ModelAndView index() {
 	
 		
 	}	
-	
+	//testing 
 	
 @RequestMapping("/login")
 public ModelAndView logins(
