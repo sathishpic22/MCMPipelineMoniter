@@ -19,6 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
  <div id="login">
         <h3 class="text-center text-white pt-5 text-primary"> Mycutemini Pipeline Login page</h3>
         <div class="container">
@@ -47,6 +48,7 @@
         </div>
     </div>
     
+    <a href="/Export">Export File</a>
     
 <input type="text" name="SearchBox" id="input"><br>
 
@@ -62,7 +64,7 @@ alert(c);
 	  
 	 });
 
- 
+  
 
  </script>
   </body>

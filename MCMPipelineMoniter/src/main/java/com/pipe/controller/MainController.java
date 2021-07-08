@@ -1,4 +1,5 @@
 package com.pipe.controller;
+import java.io.IOException;
 //testing dasdasdsa
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,11 +12,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +32,7 @@ import com.pipe.model.PipelineMoniter;
 import com.pipe.model.User;
 import com.pipe.repositary.PipelineRepositary;
 import com.pipe.repositary.UserRepositary;
+import com.pipe.service.ExportService;
 import com.pipe.service.PipelineService;
 @Controller
 public class MainController {
@@ -46,7 +51,7 @@ public ModelAndView index() {
 		
 	}	
 	//testing 
-	
+
 @RequestMapping("/login")
 public ModelAndView logins(
 		@RequestParam("username") String username,
@@ -74,6 +79,23 @@ public ModelAndView logins(
 	
 	return new ModelAndView( "index");
 }
+
+@GetMapping("Export")
+public void exportToExcel(HttpServletResponse response) throws IOException {
+    response.setContentType("application/octet-stream");
+    DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    String currentDateTime = dateFormatter.format(new Date());
+     
+    String headerKey = "Content-Disposition";
+    String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+    response.setHeader(headerKey, headerValue);
+     
+    List<PipelineMoniter> listUsers =(List<PipelineMoniter>) pipelinerepositery.findAll();
+     
+    ExportService excelExporter = new ExportService(listUsers);
+     
+    excelExporter.export(response);    
+}  
 
 
 @RequestMapping("/search")
@@ -149,6 +171,8 @@ public @ResponseBody List<PipelineMoniter> filterSearchoneInput(
 	   return pipe;
 	
 	}
+
+
 
 
 @RequestMapping("/filtersearchtwoinputs")
