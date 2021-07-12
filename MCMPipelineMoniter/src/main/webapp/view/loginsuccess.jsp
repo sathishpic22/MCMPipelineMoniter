@@ -82,6 +82,7 @@ padding: 5px;
    <a class="btn btn-primary btn-lg btn-block" id="lastfollowedview">LastFollow Update</a>
    <a class="btn btn-primary btn-lg btn-block"  id="salesupdateview">Sales Update</a>
     <a class="btn btn-primary btn-lg btn-block"  id="pipelinereports">Reports</a>
+    <a class="btn btn-primary btn-lg btn-block" id="exportservice" >Excel EXport</a>
    <a class="btn btn-primary btn-lg btn-block" href="logout">Logout</a>
   <!-- </div>  -->
 </div>
@@ -273,6 +274,18 @@ padding: 5px;
      
   </form>
   
+  <!-- EXPORT TO EXCEL -->
+  
+  <div id="exporttoexcel"> 
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
  
    
    

@@ -80,8 +80,8 @@ public ModelAndView logins(
 	return new ModelAndView( "index");
 }
 
-@GetMapping("Export")
-public void exportToExcel(HttpServletResponse response) throws IOException {
+@RequestMapping("Export/inbetweendate")
+public void exportToExcelInbetween(HttpServletResponse response,Model m,@RequestParam("startdate") @DateTimeFormat(pattern="yyyy-MM-dd") Date date1,@RequestParam("enddate") @DateTimeFormat(pattern="yyyy-MM-dd") Date date2) throws IOException {
     response.setContentType("application/octet-stream");
     DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     String currentDateTime = dateFormatter.format(new Date());
@@ -90,12 +90,56 @@ public void exportToExcel(HttpServletResponse response) throws IOException {
     String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
     response.setHeader(headerKey, headerValue);
      
-    List<PipelineMoniter> listUsers =(List<PipelineMoniter>) pipelinerepositery.findAll();
+    List<PipelineMoniter> listUsers = pipelinerepositery.expoetInbetweenData(date1,date2);
+    
+ if(listUsers.size()>=1) {
+	 
+	 ExportService excelExporter = new ExportService(listUsers);
      
-    ExportService excelExporter = new ExportService(listUsers);
+	    excelExporter.export(response); 
+	 
+ }
+ 
+ 
+}  
+
+
+@RequestMapping("Export/year")
+public void exportYear(HttpServletResponse response,@RequestParam("exportyear") int year) throws IOException {
+    response.setContentType("application/octet-stream");
+    DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    String currentDateTime = dateFormatter.format(new Date());
+    List<PipelineMoniter> listUsers;
+    String headerKey = "Content-Disposition";
+    String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+    response.setHeader(headerKey, headerValue);
+    
+   
+    	listUsers = pipelinerepositery.expoetYearData(year);
+    	
+   ExportService excelExporter = new ExportService(listUsers);
      
     excelExporter.export(response);    
 }  
+
+@RequestMapping("Export/month")
+public void exportMonth(HttpServletResponse response,@RequestParam("exportyear") int year,@RequestParam("exportmonth") int month) throws IOException {
+    response.setContentType("application/octet-stream");
+    DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    String currentDateTime = dateFormatter.format(new Date());
+    List<PipelineMoniter> listUsers;
+    String headerKey = "Content-Disposition";
+    String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+    response.setHeader(headerKey, headerValue);
+    
+   
+    	listUsers = pipelinerepositery.expoetMonthData(year,month);
+    	
+   ExportService excelExporter = new ExportService(listUsers);
+     
+    excelExporter.export(response);    
+}  
+
 
 
 @RequestMapping("/search")

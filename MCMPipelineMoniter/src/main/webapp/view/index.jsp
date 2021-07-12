@@ -48,7 +48,32 @@
         </div>
     </div>
     
-    <a href="/Export">Export File</a>
+    <form action="Export/inbetweendate" method="get">
+    
+    <input type ="date" name="startdate">
+    <input type ="date" name="enddate">
+     <input type="submit">
+    
+    </form>
+    
+    <form action="Export/year" method="get">
+    
+    <input type ="input" name="exportyear">
+    
+     <input type="submit">
+    
+   </form>
+   
+   <form action="Export/month" method="get">
+   
+   <input type ="input" name="exportyear">
+   
+   <input type ="input" name="exportmonth">
+   
+    <input type="submit">
+   
+  </form>
+    
     
 <input type="text" name="SearchBox" id="input"><br>
 

@@ -51,4 +51,16 @@ public interface PipelineRepositary extends CrudRepository<PipelineMoniter,Long>
 	@Query( "SELECT u FROM PipelineMoniter u where  Channel=?1 and location=?2 and orderType=?4 and dateofEnquiry=?3  and paymentMode=?5 and status=?6")
 	List<PipelineMoniter> filterSearchSixInput(String channel,String location,Date date,String ordertype,String paymentMode,String status);
 	
-	}
+	@Query( "SELECT u FROM PipelineMoniter u where dateofEnquiry BETWEEN ?1 AND ?2")
+	List<PipelineMoniter> expoetInbetweenData(Date date1,Date date2);
+	
+	@Query( "SELECT u FROM PipelineMoniter u where YEAR(dateofEnquiry)=?1")
+	List<PipelineMoniter> expoetYearData(int year);
+	
+	@Query( "SELECT u FROM PipelineMoniter u where YEAR(dateofEnquiry)=?1 and MONTH(dateofEnquiry)=?2")
+	List<PipelineMoniter> expoetMonthData(int year,int month);
+	
+	
+
+
+}
