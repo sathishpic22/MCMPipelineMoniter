@@ -19,7 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!------ Include the above in your HEAD tag ---------->
  <div id="login">
         <h3 class="text-center text-white pt-5 text-primary"> Mycutemini Pipeline Login page</h3>
         <div class="container">
